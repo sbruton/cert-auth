@@ -47,7 +47,7 @@ if args.create:
             policy = 'loose'
         config = configTemplate.substitute(baseDir=os.path.realpath(baseDir), policy=policy)
         open(opensslConfigFile, 'w').write(config)
-        os.system('openssl genrsa -out {0} 4096'.format(caKeyFile));
+        os.system('openssl ecparam -name prime256v1 -noout -genkey -out {0}'.format(caKeyFile))
         os.chmod(caKeyFile, 0o0400)
         if not(args.parent):
             os.system('openssl req -config {0} -key {1} -new -x509 -days 7300 -extensions v3_ca -out {2}'.format(opensslConfigFile, caKeyFile, caCertFile))
