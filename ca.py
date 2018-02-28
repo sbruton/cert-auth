@@ -63,7 +63,7 @@ elif args.issue:
     keyFile = os.path.join(privateDir, '{0}.key.pem'.format(args.issue))
     csrFile = os.path.join(csrDir, '{0}.csr.pem'.format(args.issue))
     certFile = os.path.join(certsDir, '{0}.cert.pem'.format(args.issue))
-    os.system('openssl genrsa -out {0} 2048'.format(keyFile))
+    os.system('openssl ecparam -name prime256v1 -noout -genkey -out {0}'.format(keyFile))
     os.system('openssl req -config {0} -subj "/CN={1}" -key {2} -new -out {3}'.format(opensslConfigFile, args.issue, keyFile, csrFile))
     os.system('openssl ca -config {0} -extensions server_cert -notext -in {1} -out {2}'.format(opensslConfigFile, csrFile, certFile))
     os.chmod(certFile, 0o0444)
