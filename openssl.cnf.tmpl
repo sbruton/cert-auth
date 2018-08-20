@@ -20,7 +20,8 @@ name_opt          = ca_default
 cert_opt          = ca_default
 default_days      = 365
 preserve          = no
-policy            = policy_$policy
+policy            = policy_loose
+unique_subject    = no
 
 [ policy_strict ]
 countryName             = match
